@@ -3,6 +3,8 @@ My dwm build
 
 Patches
 -------
+* hide_vacant_tags (https://dwm.suckless.org/patches/hide_vacant_tags/)
+* stacker (https://dwm.suckless.org/patches/stacker/)
 * vanitygaps (https://dwm.suckless.org/patches/vanitygaps/)
 * xrdb (https://dwm.suckless.org/patches/xrdb/)
 
