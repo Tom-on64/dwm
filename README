@@ -3,7 +3,47 @@ My dwm build
 
 Keybinds
 --------
+<MOD> - Windows key
 
+<MOD> + Return		- Spawn terminal
+<MOD> + p		- Open dmenu
+<MOD> + b		- Toggle bar
+<MOD> + s		- Make window sticky
+<MOD> + u		- Increment gaps
+<MOD> + i		- Increment inner gaps
+<MOD> + o		- Increment outer gaps
+<MOD> + Shift + u	- Decrement gaps
+<MOD> + Shift + i	- Decrement inner gaps
+<MOD> + Shift + o	- Decrement outer gaps
+<MOD> + y		- Toggle gaps
+<MOD> + Shift + y	- Default gaps
+<MOD> + j		- Next window
+<MOD> + k		- Previous window
+<MOD> + a		- Previously selected window
+<MOD> + z		- Master window
+<MOD> + Shift + j	- Swap selected & next window
+<MOD> + Shift + k	- Swap selected & previous window
+<MOD> + Shift + a	- Swap selected & previously selected window
+<MOD> + Shift + z	- Swap selected & master window
+<MOD> + <TAG>		- Go to <TAG>
+<MOD> + Shift + <TAG>	- Move selected window to <TAG>
+<MOD> + Ctrl + <TAG>	- ???
+<MOD> + Ctrl + Shift + <TAG> - ?!??!
+<MOD> + l		- Increase selected window size
+<MOD> + h		- Decrease selected window size
+<MOD> + w		- Kill window
+<MOD> + Shift + Space	- Toggle window floating
+<MOD> + F5		- Reload xrdb
+TODO: layouts
+<MOD> + Space		- Default layout
+<MOD> + Shift + q	- Quit dwm
+<MOD> + Shift + r	- Reload dwm
+
+NOTE: The number keys for <TAG> are made for the Czech keyboard layout
+
+Layouts
+-------
+* Tiling (default)
 
 Patches
 -------
