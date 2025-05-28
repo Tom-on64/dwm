@@ -14,6 +14,8 @@ static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
 static unsigned int baralpha        = 0xd0;
 static unsigned int borderalpha     = OPAQUE;
+
+/* Default color scheme */
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -25,11 +27,11 @@ static const char *colors[][3] = {
 	/*		     fg		     bg		     border   */
 	[SchemeNorm]	= { normfgcolor, normbgcolor, normbordercolor },
 	[SchemeSel]	= { selfgcolor,  selbgcolor,  selbordercolor  },
-	[SchemeStatus]	= { normfgcolor, normbgcolor, normbgcolor  }, // Statusbar right {text,background,not used but cannot be empty}
-	[SchemeTagsSel]	= { normfgcolor, normbgcolor, normbgcolor  }, // Tagbar left selected {text,background,not used but cannot be empty}
-	[SchemeTagsNorm]= { selbordercolor, normbgcolor, normbgcolor  }, // Tagbar left unselected {text,background,not used but cannot be empty}
-	[SchemeInfoSel]	= { normfgcolor, normbgcolor,  normbgcolor  }, // infobar middle  selected {text,background,not used but cannot be empty}
-	[SchemeInfoNorm]= { normfgcolor, normbgcolor, normbgcolor }, // infobar middle  unselected {text,background,not used but cannot be empty}
+	[SchemeStatus]	= { normfgcolor, normbgcolor, normbgcolor     },
+	[SchemeTagsSel]	= { normfgcolor, normbgcolor, normbgcolor     },
+	[SchemeTagsNorm]= { selbordercolor, normbgcolor, normbgcolor  },
+	[SchemeInfoSel]	= { normfgcolor, normbgcolor, normbgcolor    },
+	[SchemeInfoNorm]= { normfgcolor, normbgcolor, normbgcolor     },
 
 };
 
@@ -174,3 +176,4 @@ static const Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
+
