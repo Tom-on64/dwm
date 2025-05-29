@@ -16,22 +16,31 @@ static unsigned int baralpha        = 0x40;
 static unsigned int borderalpha     = OPAQUE;
 
 /* Default color scheme */
-static char normbgcolor[]           = "#222222";
-static char normbordercolor[]       = "#444444";
-static char normfgcolor[]           = "#bbbbbb";
-static char selfgcolor[]            = "#eeeeee";
-static char selbordercolor[]        = "#005577";
-static char selbgcolor[]            = "#005577";
+static char normfgcolor[]           = "#bc636a";
+static char normbgcolor[]           = "#1f1a24";
+static char normbordercolor[]       = "#1f1a24";
+static char selfgcolor[]            = "#777289";
+static char selbgcolor[]            = "#190e0b";
+static char selbordercolor[]        = "#8c534a";
 
 static const char *colors[][3] = {
-	/*		     fg		     bg		     border   */
+	/*
+	 * SchemeNorm		Normal windows
+	 * SchemeSel		Selected windows
+	 * SchemeStatus		Statusbar (right)
+	 * SchemeTagsSel	Tagbar selected (left)
+	 * SchemeTagsNorm	Tagbar normal (left)
+	 * SchemeInfoSel	Infobar selected (middle)
+	 * SchemeInfoNorm	Infobar normal (middle)
+	 */
+	/*		    fg		 bg           border */
 	[SchemeNorm]	= { normfgcolor, normbgcolor, normbordercolor },
-	[SchemeSel]	= { selfgcolor,  selbgcolor,  selbordercolor  },
-	[SchemeStatus]	= { normfgcolor, normbgcolor, normbgcolor     },
-	[SchemeTagsSel]	= { normfgcolor, normbgcolor, normbgcolor     },
-	[SchemeTagsNorm]= { selbordercolor, normbgcolor, normbgcolor  },
-	[SchemeInfoSel]	= { normfgcolor, normbgcolor, normbgcolor    },
-	[SchemeInfoNorm]= { normfgcolor, normbgcolor, normbgcolor     },
+	[SchemeSel]	= { selfgcolor,  selbgcolor,  selbordercolor },
+	[SchemeStatus]	= { normfgcolor, normbgcolor, NULL },
+	[SchemeTagsSel]	= { normfgcolor, normbgcolor, NULL },
+	[SchemeTagsNorm]= { selfgcolor,  normbgcolor,  NULL },
+	[SchemeInfoSel]	= { normfgcolor, normbgcolor, NULL },
+	[SchemeInfoNorm]= { normfgcolor, normbgcolor, NULL },
 
 };
 
@@ -124,7 +133,6 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_w,      killclient,     {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY,                       XK_F5,     xrdb,           {.v = NULL } },
 
 	/* Layouts */
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
