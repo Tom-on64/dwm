@@ -33,9 +33,12 @@ Keybinds
 <MOD> + h		- Decrease selected window size
 <MOD> + w		- Kill window
 <MOD> + Shift + Space	- Toggle window floating
-<MOD> + F5		- Reload xrdb
-TODO: layouts
-<MOD> + Space		- Default layout
+<MOD> + t		- Tiling layout
+<MOD> + f		- Floating layout
+<MOD> + m		- Monocle layout
+<MOD> + Shift + f	- Fibonnaci (spiral) layout
+<MOD> + w		- Dwindle layout
+<MOD> + Space		- Default layout (fibbonaci)
 <MOD> + Shift + q	- Quit dwm
 <MOD> + Shift + r	- Reload dwm
 

@@ -65,23 +65,25 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
 #include "vanitygaps.c"
 
+enum {
+	L_FIB = 0, // Default
+	L_TILE,
+	L_FLOAT,
+	L_MONO,
+	L_DWIN,
+
+	L_END
+};
+
 static const Layout layouts[] = {
-	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "[M]",      monocle },
-	{ "[@]",      spiral },
-	{ "[\\]",     dwindle },
-	{ "H[]",      deck },
-	{ "TTT",      bstack },
-	{ "===",      bstackhoriz },
-	{ "HHH",      grid },
-	{ "###",      nrowgrid },
-	{ "---",      horizgrid },
-	{ ":::",      gaplessgrid },
-	{ "|M|",      centeredmaster },
-	{ ">M>",      centeredfloatingmaster },
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ NULL,       NULL },
+	/* id	     symbol      arrange function */
+	[L_TILE] = { "[]=",      tile    },
+	[L_FLOAT]= { "><>",      NULL    },
+	[L_MONO] = { "[M]",      monocle },
+	[L_FIB]	 = { "[@]",      spiral  },
+	[L_DWIN] = { "[\\]",     dwindle },
+
+	[L_END]  = { NULL,       NULL    }
 };
 
 /* key definitions */
@@ -108,7 +110,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0";
-static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", normbgcolor, "-nf", selfgcolor, "-sb", normbgcolor, "-sf", normfgcolor, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 
 static const Key keys[] = {
@@ -135,9 +137,11 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 
 	/* Layouts */
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[L_TILE]} },
+	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[L_FLOAT]} },
+	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[L_MONO]} },
+	{ MODKEY|ShiftMask,		XK_f,	   setlayout,	   {.v = &layouts[L_FIB]} },
+	{ MODKEY,			XK_w,	   setlayout,	   {.v = &layouts[L_DWIN]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 
 	/* TODO: WTF do these do??
