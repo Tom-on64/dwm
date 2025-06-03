@@ -444,14 +444,14 @@ attachstack(Client *c)
 
 void
 buttonpress(XEvent *e)
-{
+{ /* handles clickable areas on the bar */
 	unsigned int i, x, click;
 	Arg arg = {0};
 	Client *c;
 	Monitor *m;
 	XButtonPressedEvent *ev = &e->xbutton;
 	char *text, *s, ch;
-
+	
 	click = ClkRootWin;
 	/* focus monitor if necessary */
 	if ((m = wintomon(ev->window)) && m != selmon) {
@@ -465,7 +465,7 @@ buttonpress(XEvent *e)
 		for(c = m->clients; c; c=c->next)
 			occ |= c->tags == TAGMASK ? 0 : c->tags;
 		do {
-			/* Do not reserve space for vacant tags */
+			/* do not reserve space for vacant tags */
 			if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
 				continue;
 			x += TEXTW(tags[i]);
@@ -478,26 +478,23 @@ buttonpress(XEvent *e)
 		else if (ev->x > selmon->ww - statusw) {
 			x = selmon->ww - statusw;
 			click = ClkStatusText;
-			statussig = 0;
-			for (text = s = stext; *s && x <= ev->x; s++) {
-				if ((unsigned char)(*s) < ' ') {
-					ch = *s;
+			statussig = 0; /* statuscmd stuff */
+			for (text = s = stext; *s && x <= ev->x; s++) { /* loop through to determine which block was clicked */
+				if ((unsigned char)(*s) < ' ') { /* sig delim, if block boundaries are off check this */
+					ch = *s; /* measure width */
 					*s = '\0';
-					x += TEXTW(text) - lrpad;
+					x += TEXTW(text) - lrpad; /* debug test try (lrpad / 2) */
 					*s = ch;
-					text = s + 1;
-					if (x >= ev->x)
+					text = s + 1; /* move text to next char after delim */
+					if (x >= ev->x) /* check click pos */
 						break;
-					/* reset on matching signal raw byte */
-					if (ch == statussig)
-						statussig = 0;
-					else
-						statussig = ch;
+					statussig = ch; /* save control char as sig # */
+						}
 				}
-			}
-		} else
-			click = ClkWinTitle;
-	} else if ((c = wintoclient(ev->window))) {
+		}
+	} else
+			click = ClkWinTitle; 
+		if ((c = wintoclient(ev->window))) {
 		focus(c);
 		restack(selmon);
 		XAllowEvents(dpy, ReplayPointer, CurrentTime);
@@ -1495,9 +1492,10 @@ run(void)
 	XEvent ev;
 	/* main event loop */
 	XSync(dpy, False);
-	while (running && !XNextEvent(dpy, &ev))
+	while (running && !XNextEvent(dpy, &ev)) {
 		if (handler[ev.type])
 			handler[ev.type](&ev); /* call handler */
+	}
 }
 
 void
