@@ -39,7 +39,7 @@ Keybinds
 <MOD> + Shift + f	- Fibonnaci (spiral) layout
 <MOD> + w		- Dwindle layout
 <MOD> + Space		- Default layout (fibbonaci)
-<MOD> + Shift + q	- Quit dwm
+<MOD> + Shift + q	- Open power menu (requires 'dmenu-system')
 <MOD> + Shift + r	- Reload dwm
 
 NOTE: The number keys for <TAG> are made for the Czech keyboard layout

@@ -111,12 +111,13 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0";
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", normbgcolor, "-nf", selfgcolor, "-sb", normbgcolor, "-sf", normfgcolor, NULL };
+static const char *powermenucmd[] = { "dmenu-system", NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd} },
+	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd} },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_s,      togglesticky,   {0} },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
@@ -166,7 +167,7 @@ static const Key keys[] = {
 	TAGKEYS(XK_aacute, 7)
 	TAGKEYS(XK_iacute, 8)
 
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_q,      spawn,          {.v = powermenucmd} },
 	{ MODKEY|ShiftMask,             XK_r,      quit,           {1} }, 
 };
 
