@@ -110,13 +110,15 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0";
-static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", normbgcolor, "-nf", selfgcolor, "-sb", normbgcolor, "-sf", normfgcolor, NULL };
-static const char *powermenucmd[] = { "dmenu-system", NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *dmenucmd[]		= { "dmenu-run", NULL };
+static const char *xdgmenucmd[]		= { "dmenu-xdg", NULL };
+static const char *powermenucmd[]	= { "dmenu-system", NULL };
+static const char *termcmd[]		= { "alacritty", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd} },
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = xdgmenucmd} },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd} },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_s,      togglesticky,   {0} },
