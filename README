@@ -6,8 +6,7 @@ Keybinds
 <MOD> - Windows key
 
 <MOD> + Return		- Spawn terminal
-<MOD> + p		- Open PATH launcher
-<MOD> + Shift + p  - Open XDG launcher
+<MOD> + p		- Open dmenu
 <MOD> + b		- Toggle bar
 <MOD> + s		- Make window sticky
 <MOD> + u		- Increment gaps
