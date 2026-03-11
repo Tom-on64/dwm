@@ -107,19 +107,16 @@ static const Layout layouts[] = {
 */
 
 #define STATUSBAR "dwmblocks"
+static char dmenumon[2] = "0";
 
 /* commands */
-static char dmenumon[2] = "0";
-static const char *dmenucmd[]		= { "dmenu-run", NULL };
-static const char *xdgmenucmd[]		= { "dmenu-xdg", NULL };
-static const char *powermenucmd[]	= { "dmenu-power", NULL };
-static const char *termcmd[]		= { "alacritty", NULL };
+#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = dmenucmd} },
-	{ MODKEY,	                XK_p,      spawn,          {.v = xdgmenucmd} },
-	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd} },
+	{ MODKEY,	                XK_p,      spawn,          SHCMD("dmenu-xdg") },
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("dmenu-run") },
+	{ MODKEY,                       XK_Return, spawn,          SHCMD("alacritty") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_s,      togglesticky,   {0} },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
@@ -169,8 +166,17 @@ static const Key keys[] = {
 	TAGKEYS(XK_aacute, 7)
 	TAGKEYS(XK_iacute, 8)
 
-	{ MODKEY|ShiftMask,             XK_q,      spawn,          {.v = powermenucmd} },
-	{ MODKEY|ShiftMask,             XK_r,      quit,           {1} }, 
+	/* F1-12 */
+	{ 0, XF86XK_AudioMute,		spawn, SHCMD("wpctl set-mute @DEFAULT_SINK@ toggle") },
+	{ 0, XF86XK_AudioLowerVolume,	spawn, SHCMD("wpctl set-volume @DEFAULT_SINK@ 5%-") },
+	{ 0, XF86XK_AudioRaiseVolume,	spawn, SHCMD("wpctl set-volume @DEFAULT_SINK@ 5%+") },
+	{ 0, XF86XK_MonBrightnessUp,	spawn, SHCMD("brightnessctl set +10%") },
+	{ 0, XF86XK_MonBrightnessDown,	spawn, SHCMD("brightnessctl set 10%-") },
+	{ 0, XF86XK_KbdBrightnessUp,	spawn, SHCMD("light -A 10 -s sysfs/leds/smc::kbd_backlight") },
+	{ 0, XF86XK_KbdBrightnessDown,	spawn, SHCMD("light -U 10 -s sysfs/leds/smc::kbd_backlight") },
+
+	{ MODKEY|ShiftMask, XK_q, spawn, SHCMD("dmenu-power") },
+	{ MODKEY|ShiftMask, XK_r, quit,  {1}                  }, 
 };
 
 /* button definitions */
